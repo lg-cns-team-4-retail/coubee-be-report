@@ -37,11 +37,27 @@ public class StatisticService {
         Long yesterdayAmount = statisticRepository.dailyStatisticSql(storeId, yesterdayStart, yesterdayEnd);
 
 //        ChangeRate
+        double changeRate;
+        if (yesterdayAmount == 0){
+//            전날 매출이 0 이고 당일 매출이 0 일 때
+            if(dailyAmount == 0) changeRate = 0.0;
+//            전날 매출이 0 이고 당일 매출이 0 초과일 때
+            else changeRate = 100.0;
+        }
+        else{
+//            전날 매출이 0초과이고 당일 매출이 0일 때
+            if (dailyAmount == 0){
+                changeRate = -100.0;
+            }
+//            전날 매출이 0초과이고 당일 매출이 0초과일 때
+            else{
         double rawChangeRate = ((double)(dailyAmount - yesterdayAmount) / yesterdayAmount) * 100;
         String stringChangeRate = Double.toString(rawChangeRate);
         BigDecimal decimalChangeRate = new BigDecimal(stringChangeRate);
         decimalChangeRate = decimalChangeRate.setScale(2, RoundingMode.HALF_UP);
-        double changeRate = decimalChangeRate.doubleValue();
+        changeRate = decimalChangeRate.doubleValue();
+            }
+        }
 
         return DailyStatisticDto.builder()
                 .storeId(storeId)
@@ -65,11 +81,27 @@ public class StatisticService {
         Long lastWeekAmount = statisticRepository.weeklyStatisticSql(storeId, lastWeekStart, lastWeekEnd);
 
 //        ChangeRate
-        double rawChangeRate = ((double)(thisWeekAmount - lastWeekAmount) / lastWeekAmount) * 100;
-        String stringChangeRate = Double.toString(rawChangeRate);
-        BigDecimal decimalChangeRate = new BigDecimal(stringChangeRate);
-        decimalChangeRate = decimalChangeRate.setScale(2, RoundingMode.HALF_UP);
-        double changeRate = decimalChangeRate.doubleValue();
+        double changeRate;
+        if (lastWeekAmount == 0){
+//            전주 매출이 0 이고 이번주 매출이 0 일 때
+            if(thisWeekAmount == 0) changeRate = 0.0;
+//            전주 매출이 0 이고 이번주 매출이 0 초과일 때
+            else changeRate = 100.0;
+        }
+        else{
+//            전주 매출이 0초과이고 이번주 매출이 0일 때
+            if (thisWeekAmount == 0){
+                changeRate = -100.0;
+            }
+//            전주 매출이 0초과이고 이번주 매출이 0초과일 때
+            else{
+                double rawChangeRate = ((double)(thisWeekAmount - lastWeekAmount) / lastWeekAmount) * 100;
+                String stringChangeRate = Double.toString(rawChangeRate);
+                BigDecimal decimalChangeRate = new BigDecimal(stringChangeRate);
+                decimalChangeRate = decimalChangeRate.setScale(2, RoundingMode.HALF_UP);
+                changeRate = decimalChangeRate.doubleValue();
+            }
+        }
 
         return WeeklyStatisticDto.builder()
                 .storeId(storeId)
@@ -93,11 +125,27 @@ public class StatisticService {
         Long lastMonthAmount = statisticRepository.monthlyStatisticSql(storeId, lastMonthStart, lasMonthEnd);
 
 //        ChangeRate
-        double rawChangeRate = ((double)(thisMonthAmount - lastMonthAmount) / lastMonthAmount) * 100;
-        String stringChangeRate = Double.toString(rawChangeRate);
-        BigDecimal decimalChangeRate = new BigDecimal(stringChangeRate);
-        decimalChangeRate = decimalChangeRate.setScale(2, RoundingMode.HALF_UP);
-        double changeRate = decimalChangeRate.doubleValue();
+        double changeRate;
+        if (lastMonthAmount == 0){
+//            전달 매출이 0 이고 이번달 매출이 0 일 때
+            if(thisMonthAmount == 0) changeRate = 0.0;
+//            전달 매출이 0 이고 이번달 매출이 0 초과일 때
+            else changeRate = 100.0;
+        }
+        else{
+//            전달 매출이 0초과이고 이번달 매출이 0일 때
+            if (thisMonthAmount == 0){
+                changeRate = -100.0;
+            }
+//            전달 매출이 0초과이고 이번달 매출이 0초과일 때
+            else{
+                double rawChangeRate = ((double)(thisMonthAmount - lastMonthAmount) / lastMonthAmount) * 100;
+                String stringChangeRate = Double.toString(rawChangeRate);
+                BigDecimal decimalChangeRate = new BigDecimal(stringChangeRate);
+                decimalChangeRate = decimalChangeRate.setScale(2, RoundingMode.HALF_UP);
+                changeRate = decimalChangeRate.doubleValue();
+            }
+        }
 
         return MonthlyStatisticDto.builder()
                 .storeId(storeId)
