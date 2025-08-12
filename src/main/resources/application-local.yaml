@@ -3,21 +3,34 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:15432/coubee-order
-    username: user
-    password: 1234
+    #    url: jdbc:postgresql://localhost:5432/coubee-db
+    url: jdbc:postgresql://52.78.117.85:5432/coubee_order
+    username: coubee
+    password: Cou!bee@
     driver-class-name: org.postgresql.Driver
     hikari:
-      connection-test-query: SELECT 1
-      validation-timeout: 5000
-logging.level:
-  org.hibernate.SQL: debug
+      minimum-idle: 4        # 최소 유휴 커넥션 수
+      maximum-pool-size: 4   # 최대 커넥션 수
+      idle-timeout: 10000    # 유휴 커넥션 유지 시간 (ms)
+      max-lifetime: 30000    # 커넥션 최대 생존 시간 (ms)
+      connection-timeout: 30000 # 커넥션 가져오기 최대 대기 시간 (ms)
 
   jpa:
-    hibernate:
-      ddl-auto: update #create로 변경해도 됨
-      generate-ddl: true
-      show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update # 개발 환경용
+    generate-ddl: true
+    show-sql: true
     open-in-view: false
-
+    properties:
+      hibernate.default_schema: coubee_order
+  kafka:
+    bootstrap-servers: localhost:9092
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
