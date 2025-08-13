@@ -24,8 +24,8 @@ public class StatisticRepositoryImpl implements StatisticRepository{
                 sql,
                 Long.class,
                 storeId,
-                startDay,
-                endDay,
+                startTimestamp,
+                endTimestamp,
                 OrderStatusConstant.Received
         );
     }
