@@ -3,7 +3,6 @@ server:
 
 spring:
   datasource:
-    #    url: jdbc:postgresql://localhost:5432/coubee-db
     url: jdbc:postgresql://52.78.117.85:5432/coubee_order
     username: coubee
     password: Cou!bee@
@@ -26,6 +25,7 @@ spring:
       hibernate.default_schema: coubee_order
   kafka:
     bootstrap-servers: localhost:9092
+
 eureka:
   instance:
     prefer-ip-address: true
