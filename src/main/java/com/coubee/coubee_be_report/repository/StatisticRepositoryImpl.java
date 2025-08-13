@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 
 @Repository
 @RequiredArgsConstructor
@@ -16,7 +15,7 @@ public class StatisticRepositoryImpl implements StatisticRepository{
     private final JdbcTemplate jdbcTemplate;
 
     @Override
-    public Long dailyStatisticSql(Long storeId, ZonedDateTime startDay, ZonedDateTime endDay) {
+    public Long dailyStatisticSql(Long storeId, LocalDateTime startDay, LocalDateTime endDay) {
         String sql = "SELECT COALESCE(SUM(o.total_amount),0) AS daily_amount " +
                 "FROM orders o WHERE o.store_id = ? AND o.updated_at >= ? AND o.updated_at < ?  AND o.status = ?";
         return jdbcTemplate.queryForObject(
@@ -25,7 +24,7 @@ public class StatisticRepositoryImpl implements StatisticRepository{
                 storeId,
                 startDay,
                 endDay,
-                OrderStatusConstant.Received
+                OrderStatusConstant.Pending
         );
     }
 

@@ -11,7 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.time.*;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 
 @Slf4j
@@ -22,15 +24,13 @@ public class StatisticService {
 
     @Transactional(readOnly = true)
     public DailyStatisticDto dailyStatistic(Long storeId){
-        ZoneId seoulZone = ZoneId.of("Asia/Seoul");
 //       TODAY
-        ZonedDateTime startDay = ZonedDateTime.now(seoulZone).toLocalDate().atStartOfDay(seoulZone);
-        ZonedDateTime endDay = ZonedDateTime.now(seoulZone);
-
+        LocalDateTime startDay = LocalDate.now().atStartOfDay();
+        LocalDateTime endDay = LocalDate.now().plusDays(1).atStartOfDay().minusSeconds(1);
 
 //       YESTERDAY
-        ZonedDateTime yesterdayStart = startDay.minusDays(1);
-        ZonedDateTime yesterdayEnd = endDay.minusDays(1);
+        LocalDateTime yesterdayStart = startDay.minusDays(1);
+        LocalDateTime yesterdayEnd = endDay.minusDays(1);
 
 //        Amount
         Long dailyAmount =  statisticRepository.dailyStatisticSql(storeId, startDay, endDay);
