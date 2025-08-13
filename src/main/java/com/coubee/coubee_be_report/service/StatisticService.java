@@ -35,8 +35,10 @@ public class StatisticService {
 //        Amount
         Long dailyAmount =  statisticRepository.dailyStatisticSql(storeId, startDay, endDay);
         Long yesterdayAmount = statisticRepository.dailyStatisticSql(storeId, yesterdayStart, yesterdayEnd);
-        log.info("전날매출",yesterdayAmount);
-        log.info("오늘매출",dailyAmount);
+
+        log.info("오늘 매출(dailyAmount): {}", dailyAmount);
+        log.info("어제 매출(yesterdayAmount): {}", yesterdayAmount);
+
 //        ChangeRate
         double changeRate;
         if (yesterdayAmount == 0){

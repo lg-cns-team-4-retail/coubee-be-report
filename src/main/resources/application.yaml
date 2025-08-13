@@ -1,3 +1,8 @@
 spring:
   application:
     name: coubee-be-report
+
+logging:
+  level:
+    root: INFO
+    com.coubee.coubee_be_report.repository: DEBUG
