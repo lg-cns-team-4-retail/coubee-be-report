@@ -26,7 +26,7 @@ public class StatisticService {
     public DailyStatisticDto dailyStatistic(Long storeId){
 //       TODAY
         LocalDateTime startDay = LocalDate.now().atStartOfDay();
-        LocalDateTime endDay = LocalDate.now().plusDays(1).atStartOfDay().minusSeconds(1);
+        LocalDateTime endDay = LocalDate.now().plusDays(1).atStartOfDay();
 
 //       YESTERDAY
         LocalDateTime yesterdayStart = startDay.minusDays(1);
@@ -42,7 +42,6 @@ public class StatisticService {
 //        ChangeRate
         double changeRate;
         if (yesterdayAmount == 0){
-            log.info("일로 드감", yesterdayAmount);
 //            전날 매출이 0 이고 당일 매출이 0 일 때
             if(dailyAmount == 0) changeRate = 0.0;
 //            전날 매출이 0 이고 당일 매출이 0 초과일 때

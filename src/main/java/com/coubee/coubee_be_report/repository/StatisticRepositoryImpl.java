@@ -24,7 +24,7 @@ public class StatisticRepositoryImpl implements StatisticRepository{
                 storeId,
                 startDay,
                 endDay,
-                OrderStatusConstant.Pending
+                "RECEIVED"
         );
     }
 
