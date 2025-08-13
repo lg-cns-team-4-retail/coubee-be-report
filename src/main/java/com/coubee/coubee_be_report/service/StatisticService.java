@@ -39,8 +39,6 @@ public class StatisticService {
         log.info("startDay: {}", yesterdayStart); // 이 값이 예상과 같은가?
         log.info("endDay: {}", yesterdayEnd);   // 이 값이 예상과 같은가?
         log.info("status: {}", "RECEIVED");
-// ======================================================
-
 
 //        Amount
         Long dailyAmount =  statisticRepository.dailyStatisticSql(storeId, startDay, endDay);
@@ -72,7 +70,6 @@ public class StatisticService {
         return DailyStatisticDto.builder()
                 .storeId(storeId)
                 .totalSales(dailyAmount)
-                .yesterdaySales(yesterdayAmount)
                 .changeRate(changeRate)
                 .build();
     }

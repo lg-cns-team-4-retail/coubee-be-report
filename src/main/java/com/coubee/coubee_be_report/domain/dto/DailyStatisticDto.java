@@ -14,7 +14,5 @@ public class DailyStatisticDto {
 
     private Long totalSales;
 
-    private Long yesterdaySales;
-
     private double changeRate;
 }
