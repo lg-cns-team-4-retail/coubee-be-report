@@ -22,19 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class StatisticController {
     private final StatisticService statisticService;
 
-    @GetMapping(value = "/sales/daily/{storeId}")
+    @GetMapping(value = "/sales/daily")
     public ApiResponseDto<DailyStatisticDto> viewDailyStatistic(@RequestParam Long storeId){
         String userId = GatewayRequestHeaderUtils.getUserIdOrThrowException();
         DailyStatisticDto dailyStatistic = statisticService.dailyStatistic(storeId);
         return ApiResponseDto.createOk(dailyStatistic);
     }
-    @GetMapping(value = "/sales/weekly/{storeId}")
+    @GetMapping(value = "/sales/weekly")
     public ApiResponseDto<WeeklyStatisticDto> viewWeeklyStatistic(@RequestParam Long storeId){
         String userId = GatewayRequestHeaderUtils.getUserIdOrThrowException();
         WeeklyStatisticDto weeklyStatistic = statisticService.weeklyStatistic(storeId);
         return ApiResponseDto.createOk(weeklyStatistic);
     }
-    @GetMapping(value = "/sales/monthly/{storeId}")
+    @GetMapping(value = "/sales/monthly")
     public ApiResponseDto<MonthlyStatisticDto> viewMonthlyStatistic(@RequestParam Long storeId){
         String userId = GatewayRequestHeaderUtils.getUserIdOrThrowException();
         MonthlyStatisticDto monthlyStatistic = statisticService.monthlyStatistic(storeId);
