@@ -25,13 +25,22 @@ public class StatisticService {
     @Transactional(readOnly = true)
     public DailyStatisticDto dailyStatistic(Long storeId){
 //       TODAY
-        LocalDate targetDay = LocalDate.now();
-        LocalDateTime startDay = targetDay.atStartOfDay();
-        LocalDateTime endDay = targetDay.plusDays(1).atStartOfDay();
+        LocalDateTime startDay = LocalDate.now().atStartOfDay();
+        LocalDateTime endDay = LocalDate.now().plusDays(1).atStartOfDay();
 
 //       YESTERDAY
         LocalDateTime yesterdayStart = startDay.minusDays(1);
         LocalDateTime yesterdayEnd = endDay.minusDays(1);
+
+        log.info("### DB 쿼리 파라미터 확인 ###");
+        log.info("storeId: {}", storeId);
+        log.info("startDay: {}", startDay); // 이 값이 예상과 같은가?
+        log.info("endDay: {}", endDay);   // 이 값이 예상과 같은가?
+        log.info("startDay: {}", yesterdayStart); // 이 값이 예상과 같은가?
+        log.info("endDay: {}", yesterdayEnd);   // 이 값이 예상과 같은가?
+        log.info("status: {}", "RECEIVED");
+// ======================================================
+
 
 //        Amount
         Long dailyAmount =  statisticRepository.dailyStatisticSql(storeId, startDay, endDay);
