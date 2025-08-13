@@ -36,9 +36,6 @@ public class StatisticService {
         Long dailyAmount =  statisticRepository.dailyStatisticSql(storeId, startDay, endDay);
         Long yesterdayAmount = statisticRepository.dailyStatisticSql(storeId, yesterdayStart, yesterdayEnd);
 
-        log.info("오늘 매출(dailyAmount): {}", dailyAmount);
-        log.info("어제 매출(yesterdayAmount): {}", yesterdayAmount);
-
 //        ChangeRate
         double changeRate;
         if (yesterdayAmount == 0){
@@ -65,6 +62,7 @@ public class StatisticService {
         return DailyStatisticDto.builder()
                 .storeId(storeId)
                 .totalSales(dailyAmount)
+                .yesterdaySales(yesterdayAmount)
                 .changeRate(changeRate)
                 .build();
     }
