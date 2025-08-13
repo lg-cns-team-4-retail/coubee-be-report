@@ -35,10 +35,12 @@ public class StatisticService {
 //        Amount
         Long dailyAmount =  statisticRepository.dailyStatisticSql(storeId, startDay, endDay);
         Long yesterdayAmount = statisticRepository.dailyStatisticSql(storeId, yesterdayStart, yesterdayEnd);
-
+        log.info("전날매출",yesterdayAmount);
+        log.info("오늘매출",dailyAmount);
 //        ChangeRate
         double changeRate;
         if (yesterdayAmount == 0){
+            log.info("일로 드감", yesterdayAmount);
 //            전날 매출이 0 이고 당일 매출이 0 일 때
             if(dailyAmount == 0) changeRate = 0.0;
 //            전날 매출이 0 이고 당일 매출이 0 초과일 때
