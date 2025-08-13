@@ -25,8 +25,9 @@ public class StatisticService {
     @Transactional(readOnly = true)
     public DailyStatisticDto dailyStatistic(Long storeId){
 //       TODAY
-        LocalDateTime startDay = LocalDate.now().atStartOfDay();
-        LocalDateTime endDay = LocalDate.now().plusDays(1).atStartOfDay();
+        LocalDate targetDay = LocalDate.now();
+        LocalDateTime startDay = targetDay.atStartOfDay();
+        LocalDateTime endDay = targetDay.plusDays(1).atStartOfDay();
 
 //       YESTERDAY
         LocalDateTime yesterdayStart = startDay.minusDays(1);
