@@ -17,7 +17,7 @@ public class StatisticRepositoryImpl implements StatisticRepository{
     @Override
     public Long dailyStatisticSql(Long storeId, LocalDateTime startDay, LocalDateTime endDay) {
         String sql = "SELECT COALESCE(SUM(o.total_amount),0) AS daily_amount " +
-                "FROM `order` o WHERE o.store_id = ? AND o.order_date >= ? AND o.order_date < ?  AND o.order_status = ?";
+                "FROM `orders` o WHERE o.store_id = ? AND o.updated_at >= ? AND o.updated_at < ?  AND o.status = ?";
         return jdbcTemplate.queryForObject(
                 sql,
                 Long.class,
@@ -30,8 +30,8 @@ public class StatisticRepositoryImpl implements StatisticRepository{
 
     @Override
     public Long weeklyStatisticSql(Long storeId, LocalDateTime startWeek, LocalDateTime endWeek) {
-        String sql = "SELECT COALESCE(SUM(o.total_amount),0) AS weekly_amount " +
-                "FROM `order` o WHERE o.store_id = ? AND o.order_date >= ? AND o.order_date < ?  AND o.order_status = ?";
+        String sql = "SELECT COALESCE(SUM(o.total_amount),0) AS daily_amount " +
+                "FROM `orders` o WHERE o.store_id = ? AND o.updated_at >= ? AND o.updated_at < ?  AND o.status = ?";
         return jdbcTemplate.queryForObject(
                 sql,
                 Long.class,
@@ -45,8 +45,8 @@ public class StatisticRepositoryImpl implements StatisticRepository{
 
     @Override
     public Long monthlyStatisticSql(Long storeId,LocalDateTime startMonth, LocalDateTime endMonth) {
-        String sql = "SELECT COALESCE(SUM(o.total_amount),0) AS weekly_amount " +
-                "FROM `order` o WHERE o.store_id = ? AND o.order_date >= ? AND o.order_date < ?  AND o.order_status = ?";
+        String sql = "SELECT COALESCE(SUM(o.total_amount),0) AS daily_amount " +
+                "FROM `orders` o WHERE o.store_id = ? AND o.updated_at >= ? AND o.updated_at < ?  AND o.status = ?";
         return jdbcTemplate.queryForObject(
                 sql,
                 Long.class,
