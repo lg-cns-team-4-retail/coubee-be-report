@@ -33,8 +33,8 @@ public class StatisticService {
         LocalDateTime yesterdayEnd = endDay.minusDays(1);
 
 //        Amount
-        Long dailyAmount =  statisticRepository.dailyStatisticSql(storeId, startDay, endDay);
-        Long yesterdayAmount = statisticRepository.dailyStatisticSql(storeId, yesterdayStart, yesterdayEnd);
+        Integer dailyAmount =  statisticRepository.dailyStatisticSql(storeId, startDay, endDay);
+        Integer yesterdayAmount = statisticRepository.dailyStatisticSql(storeId, yesterdayStart, yesterdayEnd);
 
 //        ChangeRate
         double changeRate;

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface StatisticRepository {
-    Long dailyStatisticSql(Long storeId, LocalDateTime startDay, LocalDateTime endDay);
+    Integer dailyStatisticSql(Long storeId, LocalDateTime startDay, LocalDateTime endDay);
     Long weeklyStatisticSql(Long storeId, LocalDateTime startWeek, LocalDateTime endWeek);
     Long monthlyStatisticSql(Long storeId, LocalDateTime startMonth, LocalDateTime endMonth);
 }
