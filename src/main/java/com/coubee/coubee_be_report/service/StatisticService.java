@@ -36,8 +36,6 @@ public class StatisticService {
         Integer dailyAmount =  statisticRepository.dailyStatisticSql(storeId, startDay, endDay);
         Integer yesterdayAmount = statisticRepository.dailyStatisticSql(storeId, yesterdayStart, yesterdayEnd);
 
-        log.info("오늘 매출", dailyAmount);
-        log.info("어제매출", yesterdayAmount);
 //        ChangeRate
         double changeRate;
         if (yesterdayAmount == 0){

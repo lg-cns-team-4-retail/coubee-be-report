@@ -18,14 +18,12 @@ public class StatisticRepositoryImpl implements StatisticRepository{
     public Integer dailyStatisticSql(Long storeId, LocalDateTime startDay, LocalDateTime endDay) {
         String sql = "SELECT COALESCE(SUM(o.total_amount),0) AS daily_amount " +
                 "FROM coubee_order.orders o WHERE o.store_id = ? AND o.updated_at >= ? AND o.updated_at < ?  AND o.status = ?";
-        java.sql.Timestamp startTimestamp = java.sql.Timestamp.valueOf(startDay);
-        java.sql.Timestamp endTimestamp = java.sql.Timestamp.valueOf(endDay);
         return jdbcTemplate.queryForObject(
                 sql,
                 Integer.class,
                 storeId,
-                startTimestamp,
-                endTimestamp,
+                startDay,
+                endDay,
                 OrderStatusConstant.Received
         );
     }
