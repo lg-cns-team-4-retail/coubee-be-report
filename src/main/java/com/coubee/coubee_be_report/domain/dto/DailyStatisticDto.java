@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class DailyStatisticDto {
     private Long storeId;
 
-    private Long totalSales;
+    private Integer totalSales;
 
     private double changeRate;
 }
